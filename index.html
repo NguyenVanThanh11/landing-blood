@@ -212,6 +212,42 @@
         background: darkgreen;
       }
     </style>
+
+    <script>
+      !(function (f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function () {
+          n.callMethod
+            ? n.callMethod.apply(n, arguments)
+            : n.queue.push(arguments);
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = "2.0";
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s);
+      })(
+        window,
+        document,
+        "script",
+        "https://connect.facebook.net/en_US/fbevents.js"
+      );
+      fbq("init", "1214343470315464");
+      fbq("track", "PageView");
+    </script>
+    <noscript>
+      <img
+        height="1"
+        width="1"
+        style="display: none"
+        src="https://www.facebook.com/tr?id=1214343470315464&ev=PageView&noscript=1"
+      />
+    </noscript>
   </head>
   <body class="bg-gray-100">
     <!-- Fixed Header -->
@@ -1021,6 +1057,15 @@
           Giá gốc: <span class="line-through">599.000đ</span>
           <span class="text-orange-500">Tiết kiệm: 334k</span>
         </div>
+
+        <div
+          class="bg-yellow-100 p-3 rounded-lg text-red-600 font-bold mb-2 text-xl"
+        >
+          🔥 MUA 2 MÁY CHỈ
+          <span class="text-4xl text-red-500">509.000đ</span> 🔥
+          <div class="text-gray-600 text-sm">(Tiết kiệm hơn!)</div>
+        </div>
+
         <div class="border border-gray-300 p-4 mb-4">
           <div class="flex items-center mb-2">
             <i class="fas fa-check-circle text-blue-500 mr-2"></i>
@@ -1153,16 +1198,22 @@
           <!-- Contact Information -->
           <div>
             <h3 class="text-xl font-bold mb-4">Thông Tin Liên Hệ</h3>
-            <p>Địa chỉ: ABC</p>
-            <p>Email: info@tazako.com</p>
-            <p>Hotline: 0901 234 567</p>
+            <p>Địa chỉ: TỪ SƠN - BẮC NINH</p>
+            <p>Email: ytegiadinhh@gmail.com</p>
+            <p>Hotline: 0383 275 612</p>
           </div>
 
           <!-- Quick Links -->
           <div>
             <h3 class="text-xl font-bold mb-4">Liên Kết Nhanh</h3>
             <ul class="space-y-2">
-              <li><a class="hover:text-blue-400">Trang Chủ</a></li>
+              <li>
+                <a
+                  href="https://www.facebook.com/profile.php?id=61551463125897"
+                  class="hover:text-blue-400"
+                  >Trang Chủ</a
+                >
+              </li>
               <li><a class="hover:text-blue-400">Sản Phẩm</a></li>
               <li><a class="hover:text-blue-400">Đánh Giá</a></li>
               <li><a class="hover:text-blue-400">Liên Hệ</a></li>
@@ -1173,7 +1224,9 @@
           <div>
             <h3 class="text-xl font-bold mb-4">Theo Dõi Chúng Tôi</h3>
             <div class="flex justify-center space-x-4">
-              <a class="text-white hover:text-blue-400"
+              <a
+                href="https://www.facebook.com/profile.php?id=61551463125897"
+                class="text-white hover:text-blue-400"
                 ><i class="fab fa-facebook text-2xl"></i
               ></a>
               <a class="text-white hover:text-blue-400"
@@ -1191,7 +1244,7 @@
 
         <!-- Copyright -->
         <div class="mt-8 border-t border-gray-700 pt-8">
-          <p>&copy; 2023 TAZAKO. All rights reserved.</p>
+          <p>&copy; All rights reserved.</p>
         </div>
       </div>
     </footer>
@@ -1489,8 +1542,12 @@
           }
         ).finally(() => {
           document.getElementById("loading-overlay").style.display = "none";
+
           showPopup();
+
           e.target.reset();
+
+          fbq("track", "Lead"); // track tới pixel meta
         });
       });
 
