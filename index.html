@@ -211,6 +211,75 @@
       .popup button:hover {
         background: darkgreen;
       }
+
+      .checkbox-container {
+        position: relative;
+      }
+
+      .text-check {
+        font-size: 14px;
+        color: #7d2ae8;
+        margin-bottom: 6px;
+        margin-left: 6px;
+      }
+
+      .custom-checkbox {
+        position: absolute;
+        opacity: 0;
+        width: 30px;
+        height: 30px;
+        z-index: 100;
+        cursor: pointer;
+      }
+
+      .custom-checkbox:disabled {
+        cursor: not-allowed;
+      }
+
+      .input-check {
+        position: relative;
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        background-color: white;
+      }
+
+      .input-check__disabled {
+        background-color: gray;
+        border-color: #999;
+      }
+
+      .input-check::before {
+        content: "";
+        position: absolute;
+        top: 10px;
+        left: 6px;
+        width: 15px;
+        height: 6px;
+        border-bottom: 4px solid #fff;
+        border-left: 4px solid #fff;
+        transform: scale(0) rotate(-45deg);
+        transition: 0.5s;
+      }
+
+      .custom-checkbox:checked ~ .input-check {
+        background-color: #244a64;
+      }
+
+      .custom-checkbox:checked ~ .input-check::before {
+        transform: scale(1) rotate(-45deg);
+      }
+
+      .custom-checkbox:disabled ~ .input-check {
+        background-color: rgb(184, 184, 184);
+        border-color: #999;
+      }
+
+      .custom-checkbox:disabled:checked ~ .input-check::before {
+        border-color: #ccc;
+      }
     </style>
 
     <script>
@@ -381,15 +450,79 @@
                 <div class="text-orange-500">Tiết kiệm: 334k</div>
               </div>
             </div>
+
+            <div
+              class="neumorphic p-3 rounded-3xl text-center mt-4"
+              onclick="scrollToSection()"
+            >
+              <div
+                class="bg-green-500 p-3 rounded-lg flex items-center space-x-4"
+              >
+                <i class="fas fa-tags text-white text-2xl"></i>
+                <div class="text-white font-bold text-lg">MUA 2 MÁY CHỈ</div>
+                <div
+                  class="font-bold text-2xl px-3 py-1 bg-white text-red rounded"
+                  style="color: red; border-radius: 8px 0 0 8px"
+                >
+                  509.000đ
+                </div>
+                <img
+                  src="./fire.gif"
+                  alt=""
+                  style="
+                    width: 40px;
+                    margin-left: 0;
+                    border-radius: 0 8px 8px 0;
+                  "
+                />
+              </div>
+            </div>
           </div>
+
           <div class="neumorphic p-4 rounded-3xl text-center">
             <h1 class="text-2xl md:text-3xl font-bold mb-2">
               MÁY ĐO HUYẾT ÁP TAZAKO
             </h1>
-            <p class="text-orange-500 mb-4 text-lg">
+            <p class="text-orange-500 mb-2 text-lg">
               HỖ TRỢ THEO DÕI HUYẾT ÁP NGAY TẠI NHÀ<br />BẢO VỆ SỨC KHỎE GIA
               ĐÌNH BẠN
             </p>
+
+            <div class="flex items-center space-x-4 justify-center mb-1">
+              <div
+                class="flex items-center space-x-1 pr-4"
+                style="border-right: 1px solid rgb(192, 192, 192)"
+              >
+                <span
+                  class="text-lg font-semibold"
+                  style="border-bottom: 2px solid black"
+                  >4.9</span
+                >
+                <div class="flex items-center">
+                  <i class="fas fa-star text-yellow-500"></i>
+                  <i class="fas fa-star text-yellow-500"></i>
+                  <i class="fas fa-star text-yellow-500"></i>
+                  <i class="fas fa-star text-yellow-500"></i>
+                  <i class="fas fa-star text-yellow-500"></i>
+                </div>
+              </div>
+              <div
+                class="flex items-center space-x-1 pr-4"
+                style="border-right: 1px solid rgb(192, 192, 192)"
+              >
+                <span
+                  class="text-lg font-semibold"
+                  style="border-bottom: 2px solid black"
+                  >838</span
+                >
+                <span class="text-gray-500">Đánh Giá</span>
+              </div>
+              <div class="flex items-center space-x-1">
+                <span class="text-lg font-semibold">5,3k</span>
+                <span class="text-gray-500">Đã bán</span>
+              </div>
+            </div>
+
             <div
               class="flex items-center justify-center mb-4 bg-orange-100 rounded-xl p-2"
             >
@@ -787,8 +920,13 @@
     <section class="py-4 bg-gradient-to-r from-blue-50 to-purple-50">
       <div class="container mx-auto px-4">
         <h2 class="text-3xl font-bold text-center mb-4">
-          Đánh Giá Của Khách Hàng
+          Đánh Giá Của Khách Hàng (738 đánh giá)
         </h2>
+        <div class="flex items-center justify-end mb-1">
+          <div class="text-center cursor-pointer">
+            <span style="color: rgb(45, 45, 45)">Xem thêm &gt;</span>
+          </div>
+        </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div
             class="max-w-2xl mx-auto bg-white p-4 border border-gray-300 rounded-lg"
@@ -1045,6 +1183,7 @@
     >
       <div
         class="bg-white p-6 rounded-lg shadow-lg text-center container mx-auto px-4"
+        onclick="scrollToSection()"
       >
         <h1 class="text-xl font-bold mb-2">
           ĐẶT HÀNG HÔM NAY NHẬN NGAY ƯU ĐÃI
@@ -1165,6 +1304,26 @@
           >
             <option value="">Chọn phường/xã</option>
           </select>
+
+          <div class="mb-2 flex items-center">
+            <span class="checkbox-container">
+              <input id="one" type="checkbox" class="mr-2 custom-checkbox" />
+              <span class="input-check"></span>
+            </span>
+            <span class="text-check text-lg"
+              >1 MÁY 265.000đ + MIỄN PHÍ SHIP</span
+            >
+          </div>
+          <div class="mb-2 flex items-center">
+            <span class="checkbox-container">
+              <input id="two" type="checkbox" class="mr-2 custom-checkbox" />
+              <span class="input-check"></span>
+            </span>
+            <span class="text-check text-lg"
+              >2 MÁY 509.000đ + MIỄN SHIP (tiết kiệm hơn)</span
+            >
+          </div>
+
           <button
             type="submit"
             class="w-full bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300 flash-effect"
@@ -1200,7 +1359,7 @@
             <h3 class="text-xl font-bold mb-4">Thông Tin Liên Hệ</h3>
             <p>Địa chỉ: TỪ SƠN - BẮC NINH</p>
             <p>Email: ytegiadinhh@gmail.com</p>
-            <p>Hotline: 0383 275 612</p>
+            <p>Hotline: 0799 176 434</p>
           </div>
 
           <!-- Quick Links -->
