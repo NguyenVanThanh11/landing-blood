@@ -1266,6 +1266,7 @@
             type="text"
             placeholder="Họ và Tên"
             id="name"
+            name="name"
             class="w-full p-3 mb-4 rounded-lg border border-gray-300"
             required
           />
@@ -1273,6 +1274,7 @@
             type="tel"
             placeholder="Số Điện Thoại"
             id="phone"
+            name="phone"
             class="w-full p-3 mb-4 rounded-lg border border-gray-300"
             required
           />
@@ -1280,6 +1282,7 @@
             type="text"
             placeholder="Địa chỉ (Ghi rõ số nhà, tên đường,...)"
             id="address"
+            name="address"
             class="w-full p-3 mb-4 rounded-lg border border-gray-300"
             required
           />
@@ -1307,7 +1310,12 @@
 
           <div class="mb-2 flex items-center">
             <span class="checkbox-container">
-              <input id="one" type="checkbox" class="mr-2 custom-checkbox" />
+              <input
+                id="one"
+                type="checkbox"
+                class="mr-2 custom-checkbox"
+                name="product"
+              />
               <span class="input-check"></span>
             </span>
             <span class="text-check text-lg"
@@ -1316,7 +1324,12 @@
           </div>
           <div class="mb-2 flex items-center">
             <span class="checkbox-container">
-              <input id="two" type="checkbox" class="mr-2 custom-checkbox" />
+              <input
+                id="two"
+                type="checkbox"
+                class="mr-2 custom-checkbox"
+                name="product"
+              />
               <span class="input-check"></span>
             </span>
             <span class="text-check text-lg"
@@ -1671,6 +1684,16 @@
         document.getElementById("loading-overlay").style.display = "flex";
 
         const formData = new FormData(e.target);
+
+        const products = [];
+
+        if (document.getElementById("one").checked) {
+          products.push("1 MÁY 265.000đ");
+        }
+        if (document.getElementById("two").checked) {
+          products.push("2 MÁY 509.000đ");
+        }
+
         const data = {
           name: formData.get("name"),
           phone: formData.get("phone"),
@@ -1686,10 +1709,13 @@
           ward: document.getElementById("ward").options[
             document.getElementById("ward").selectedIndex
           ].text,
+          product: products.join(", "),
         };
 
+        console.log(data);
+
         fetch(
-          "https://script.google.com/macros/s/AKfycbwHuHTRnKkoaCNs7MCYIWQ8LOCD8EokQTkxMKiO2j80RM6AOqmxFiO1dPUP5Tw8bk0F/exec",
+          "https://script.google.com/macros/s/AKfycbxkbhcomPjkHRW7U1GlvW9msqOFdiHpxlGlXmdkFqBvXTL4v4xGk0jnorykB9_3X5oI/exec",
           {
             method: "POST",
             body: JSON.stringify(data),
