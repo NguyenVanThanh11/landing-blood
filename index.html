@@ -1,0 +1,1765 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-8P34QGWGCF"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-8P34QGWGCF");
+    </script>
+    <script>
+      !(function (f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function () {
+          n.callMethod
+            ? n.callMethod.apply(n, arguments)
+            : n.queue.push(arguments);
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = "2.0";
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s);
+      })(
+        window,
+        document,
+        "script",
+        "https://connect.facebook.net/en_US/fbevents.js"
+      );
+      fbq("init", "1214343470315464");
+      fbq("track", "PageView");
+    </script>
+    <noscript>
+      <img
+        height="1"
+        width="1"
+        style="display: none"
+        src="https://www.facebook.com/tr?id=1214343470315464&ev=PageView&noscript=1"
+      />
+    </noscript>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Máy đo huyết áp Tazoka</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+      /* Neumorphism Effect */
+      .neumorphic {
+        background: rgba(255, 255, 255, 0.25);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+      }
+
+      /* Toast Notification */
+      .toast {
+        width: 100%;
+        max-width: 300px;
+        position: fixed;
+        top: -100px;
+        left: 10px;
+        background: white;
+        padding: 16px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        transition: top 0.5s ease-in-out, opacity 0.5s ease-in-out;
+        opacity: 0;
+      }
+
+      @keyframes slideDown {
+        0% {
+          top: -100px;
+          opacity: 0;
+        }
+        100% {
+          top: 80px;
+          opacity: 1;
+        }
+      }
+
+      /* Slide Animation */
+      @keyframes slide {
+        0% {
+          transform: translateX(0);
+        }
+
+        100% {
+          transform: translateX(calc(-100%));
+        }
+
+        /* Scroll 8 images (9 - 1) */
+      }
+
+      .slide-container {
+        display: flex;
+        width: calc(100% * 4);
+        /* Total width of all images */
+        animation: slide 30s linear infinite;
+      }
+
+      /* Flashing Effect for Buttons */
+      @keyframes flash {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+
+        50% {
+          transform: scale(1.05);
+        }
+      }
+
+      .flash-effect {
+        animation: flash 1.5s infinite;
+      }
+
+      /* Golden Hour Promotion Section */
+      .promotion-card {
+        animation: flashSold 1.5s infinite;
+      }
+
+      @keyframes flashSold {
+        0%,
+        100% {
+          opacity: 1;
+        }
+
+        50% {
+          opacity: 0.2;
+        }
+      }
+
+      .responsive-slide {
+        height: 80vh; /* Default height for small screens */
+      }
+
+      @media (max-width: 800px) {
+        .responsive-slide {
+          height: 40vh; /* Height for large screens */
+        }
+      }
+
+      .spin {
+        border: 4px solid rgba(0, 0, 0, 0.1);
+        border-top: 4px solid #3498db; /* Màu của spin */
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        animation: spin 1s linear infinite;
+        margin: 0 auto;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Overlay để làm mờ nền khi spin đang chạy */
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.8); /* Màu nền mờ */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000; /* Đảm bảo overlay hiển thị trên tất cả các phần tử khác */
+      }
+
+      /* Popup Container */
+      .popup {
+        width: 90%;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        z-index: 1001; /* Đảm bảo popup hiển thị trên overlay */
+        display: none; /* Ẩn popup ban đầu */
+        animation: fadeIn 0.3s ease-in-out;
+      }
+
+      /* Overlay để làm mờ nền khi popup hiển thị */
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5); /* Màu nền mờ */
+        display: none; /* Ẩn overlay ban đầu */
+        z-index: 1000; /* Đảm bảo overlay hiển thị trên tất cả các phần tử khác */
+      }
+
+      /* Hiệu ứng fadeIn cho popup */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translate(-50%, -60%);
+        }
+        to {
+          opacity: 1;
+          transform: translate(-50%, -50%);
+        }
+      }
+
+      /* Hiệu ứng fadeOut cho popup */
+      @keyframes fadeOut {
+        from {
+          opacity: 1;
+          transform: translate(-50%, -50%);
+        }
+        to {
+          opacity: 0;
+          transform: translate(-50%, -60%);
+        }
+      }
+
+      /* Nút đóng popup */
+      .popup button {
+        background: green;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 10px;
+      }
+
+      .popup button:hover {
+        background: darkgreen;
+      }
+
+      .checkbox-container {
+        position: relative;
+      }
+
+      .text-check {
+        font-size: 14px;
+        color: #7d2ae8;
+        margin-bottom: 6px;
+        margin-left: 6px;
+      }
+
+      .custom-checkbox {
+        position: absolute;
+        opacity: 0;
+        width: 30px;
+        height: 30px;
+        z-index: 100;
+        cursor: pointer;
+      }
+
+      .custom-checkbox:disabled {
+        cursor: not-allowed;
+      }
+
+      .input-check {
+        position: relative;
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        background-color: white;
+      }
+
+      .input-check__disabled {
+        background-color: gray;
+        border-color: #999;
+      }
+
+      .input-check::before {
+        content: "";
+        position: absolute;
+        top: 10px;
+        left: 6px;
+        width: 15px;
+        height: 6px;
+        border-bottom: 4px solid #fff;
+        border-left: 4px solid #fff;
+        transform: scale(0) rotate(-45deg);
+        transition: 0.5s;
+      }
+
+      .custom-checkbox:checked ~ .input-check {
+        background-color: #244a64;
+      }
+
+      .custom-checkbox:checked ~ .input-check::before {
+        transform: scale(1) rotate(-45deg);
+      }
+
+      .custom-checkbox:disabled ~ .input-check {
+        background-color: rgb(184, 184, 184);
+        border-color: #999;
+      }
+
+      .custom-checkbox:disabled:checked ~ .input-check::before {
+        border-color: #ccc;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100">
+    <!-- Fixed Header -->
+    <header
+      class="fixed top-0 left-0 w-full shadow-md z-50 bg-opacity-75"
+      style="background: #6574c4"
+    >
+      <div
+        class="container mx-auto flex justify-between items-center py-4 px-6"
+      >
+        <div class="text-center md:text-left">
+          <div class="text-lg font-bold text-white">HÀNG NỘI ĐỊA NHẬT</div>
+          <div class="text-lg font-bold text-white">NHẬP KHẨU CHÍNH HÃNG</div>
+        </div>
+        <button
+          class="bg-red-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-red-700 transition duration-300 flash-effect"
+          onclick="scrollToSection()"
+        >
+          Mua Ngay
+        </button>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section
+      class="min-h-screen flex items-center justify-center pt-[6rem] md:pt-20"
+    >
+      <div
+        class="w-full px-1 flex flex-col md:flex-row items-center space-y-8 md:space-y-0 md:space-x-8"
+      >
+        <!-- Product Image Card (70%) -->
+        <div
+          class="neumorphic p-4 rounded-3xl overflow-hidden w-full md:w-[70%] relative responsive-slide"
+        >
+          <div class="slide-container h-full">
+            <img
+              src="./vn-11134207-7r98o-lz4ld3smaye97b.png"
+              alt="Product 1"
+              class="w-full h-full object-cover rounded-2xl mx-2"
+            />
+            <img
+              src="./vn-11134207-7r98o-lz4leiypdvohd8.png"
+              alt="Product 2"
+              class="w-full h-full object-cover rounded-2xl mx-2"
+            />
+            <img
+              src="./png (1).png"
+              alt="Product 3"
+              class="w-full h-full object-cover rounded-2xl mx-2"
+            />
+            <img
+              src="./png (2).png"
+              alt="Product 4"
+              class="w-full h-full object-cover rounded-2xl mx-2"
+            />
+            <img
+              src="./png (3).png"
+              alt="Product 5"
+              class="w-full h-full object-cover rounded-2xl mx-2"
+            />
+            <img
+              src="./png (4).png"
+              alt="Product 6"
+              class="w-full h-full object-cover rounded-2xl mx-2"
+            />
+            <img
+              src="./png (5).png"
+              alt="Product 7"
+              class="w-full h-full object-cover rounded-2xl mx-2"
+            />
+            <img
+              src="./png (6).png"
+              alt="Product 8"
+              class="w-full h-full object-cover rounded-2xl mx-2"
+            />
+            <img
+              src="./png (7).png"
+              alt="Product 9"
+              class="w-full h-full object-cover rounded-2xl mx-2"
+            />
+          </div>
+        </div>
+
+        <!-- Info Card (30%) -->
+        <div class="w-full md:w-[30%] !mt-4">
+          <div class="neumorphic p-3 rounded-3xl text-center mb-4">
+            <div
+              class="bg-yellow-400 p-3 rounded-lg flex flex-col md:flex-row items-center space-x-4"
+            >
+              <i class="fas fa-bolt text-white text-2xl promotion-card"></i>
+              <div class="text-white font-bold text-lg promotion-card">
+                ƯU ĐÃI GIỜ VÀNG
+              </div>
+              <div class="flex items-center space-x-2 mt-2 md:mt-0">
+                <div
+                  class="bg-white text-black font-bold text-lg px-2 py-1 rounded"
+                >
+                  00
+                </div>
+                <div class="text-white font-bold text-lg">:</div>
+                <div
+                  id="minutes"
+                  class="bg-white text-black font-bold text-lg px-2 py-1 rounded"
+                >
+                  00
+                </div>
+                <div class="text-white font-bold text-lg">:</div>
+                <div
+                  id="seconds"
+                  class="bg-white text-black font-bold text-lg px-2 py-1 rounded"
+                >
+                  00
+                </div>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-center mt-4">
+              <div class="mr-4">
+                <div class="text-black font-bold">CHỈ CÒN</div>
+                <div class="text-red-500 text-2xl font-bold">265.000đ</div>
+              </div>
+              <div
+                class="bg-purple-500 text-white p-3 py-2 rounded mt-2 md:mt-0 md:ml-3"
+              >
+                <i class="fas fa-check text-lg"></i>
+              </div>
+              <div class="mt-2 md:mt-0 md:ml-6">
+                <div class="text-gray-500 line-through text-lg">
+                  Giá gốc: 599.000đ
+                </div>
+                <div class="text-orange-500">Tiết kiệm: 334k</div>
+              </div>
+            </div>
+
+            <div
+              class="neumorphic p-3 rounded-3xl text-center mt-4"
+              onclick="scrollToSection()"
+            >
+              <div
+                class="bg-green-500 p-3 rounded-lg flex items-center space-x-4"
+              >
+                <i class="fas fa-tags text-white text-2xl"></i>
+                <div class="text-white font-bold text-lg">MUA 2 MÁY CHỈ</div>
+                <div
+                  class="font-bold text-2xl px-3 py-1 bg-white text-red rounded"
+                  style="color: red; border-radius: 8px 0 0 8px"
+                >
+                  509.000đ
+                </div>
+                <img
+                  src="./fire.gif"
+                  alt=""
+                  style="
+                    width: 40px;
+                    margin-left: 0;
+                    border-radius: 0 8px 8px 0;
+                  "
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="neumorphic p-4 rounded-3xl text-center">
+            <h1 class="text-2xl md:text-3xl font-bold mb-2">
+              MÁY ĐO HUYẾT ÁP TAZAKO
+            </h1>
+            <p class="text-orange-500 mb-2 text-lg">
+              HỖ TRỢ THEO DÕI HUYẾT ÁP NGAY TẠI NHÀ<br />BẢO VỆ SỨC KHỎE GIA
+              ĐÌNH BẠN
+            </p>
+
+            <div class="flex items-center space-x-4 justify-center mb-1">
+              <div
+                class="flex items-center space-x-1 pr-4"
+                style="border-right: 1px solid rgb(192, 192, 192)"
+              >
+                <span
+                  class="text-lg font-semibold"
+                  style="border-bottom: 2px solid black"
+                  >4.9</span
+                >
+                <div class="flex items-center">
+                  <i class="fas fa-star text-yellow-500"></i>
+                  <i class="fas fa-star text-yellow-500"></i>
+                  <i class="fas fa-star text-yellow-500"></i>
+                  <i class="fas fa-star text-yellow-500"></i>
+                  <i class="fas fa-star text-yellow-500"></i>
+                </div>
+              </div>
+              <div
+                class="flex items-center space-x-1 pr-4"
+                style="border-right: 1px solid rgb(192, 192, 192)"
+              >
+                <span
+                  class="text-lg font-semibold"
+                  style="border-bottom: 2px solid black"
+                  >838</span
+                >
+                <span class="text-gray-500">Đánh Giá</span>
+              </div>
+              <div class="flex items-center space-x-1">
+                <span class="text-lg font-semibold">5,3k</span>
+                <span class="text-gray-500">Đã bán</span>
+              </div>
+            </div>
+
+            <div
+              class="flex items-center justify-center mb-4 bg-orange-100 rounded-xl p-2"
+            >
+              <i class="fas fa-trophy text-orange-500 mr-2"></i>
+              <span class="text-sm font-semibold">Sản phẩm hàng đầu</span>
+              <span class="mx-2">|</span>
+              <span class="text-sm">Dụng cụ Y tế bán chạy</span>
+            </div>
+            <div
+              class="flex items-center justify-center mb-4 bg-green-100 p-2 rounded-xl"
+            >
+              <span
+                class="bg-green-500 text-white px-2 py-1 rounded text-sm font-semibold mr-2"
+                >COD</span
+              >
+              <span class="text-sm"
+                >NHẬN HÀNG KIỂM TRA TRƯỚC KHI THANH TOÁN</span
+              >
+            </div>
+            <p class="text-lg font-semibold mb-4">
+              MIỄN PHÍ GIAO HÀNG TOÀN QUỐC
+            </p>
+            <button
+              class="bg-red-500 text-white text-lg font-bold py-2 px-6 rounded hover:bg-red-600 transition duration-300 flash-effect w-full md:w-auto"
+              onclick="scrollToSection()"
+            >
+              ĐẶT HÀNG NGAY
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Target Audience Section -->
+    <section class="py-4 bg-white">
+      <div class="text-center mb-6">
+        <h1 class="text-green-600 text-2xl font-bold">
+          ĐỐI TƯỢNG KHÁCH HÀNG SỬ DỤNG
+        </h1>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="flex flex-col items-center">
+          <img
+            alt="Người cao tuổi đang đo huyết áp"
+            class="mb-1"
+            height="150"
+            src="https://timmachhongtam.com/wp-content/uploads/2024/07/22.jpg"
+            width="150"
+          />
+          <p class="text-center text-green-600 font-semibold">Người cao tuổi</p>
+        </div>
+        <div class="flex flex-col items-center">
+          <img
+            alt="Người được chuẩn đoán cao hoặc hạ huyết áp"
+            class="mb-1"
+            height="150"
+            src="https://datafiles.nghean.gov.vn/nan-ubnd/2882/quantritintuc20241/z5034802437166_8e09520a7251286638399529599324107.jpg"
+            width="150"
+          />
+          <p class="text-center text-green-600 font-semibold">
+            Người được chuẩn đoán cao hoặc hạ huyết áp
+          </p>
+        </div>
+        <div class="flex flex-col items-center">
+          <img
+            alt="Người có vấn đề về tim mạch"
+            class="mb-1"
+            height="150"
+            src="https://benhvienhungvuong.vn/wp-content/uploads/2023/07/photo_1_1545521538078673377382_gifu.jpg"
+            width="150"
+          />
+          <p class="text-center text-green-600 font-semibold">
+            Người có vấn đề về tim mạch
+          </p>
+        </div>
+        <div class="flex flex-col items-center">
+          <img
+            alt="Người béo phì"
+            class="mb-1"
+            height="150"
+            src="https://microlife.com.vn/wp-content/uploads/2024/01/beo-phi-tang-cholesterol.png"
+            width="150"
+          />
+          <p class="text-center text-green-600 font-semibold">Người béo phì</p>
+        </div>
+        <div class="flex flex-col items-center">
+          <img
+            alt="Phụ nữ mang thai"
+            class="mb-1"
+            height="150"
+            src="https://suckhoedoisong.qltns.mediacdn.vn/324455921873985536/2023/2/10/phu-nu-co-thai-16760132809681579793542.jpg"
+            width="150"
+          />
+          <p class="text-center text-green-600 font-semibold">
+            Phụ nữ mang thai
+          </p>
+        </div>
+        <div class="flex flex-col items-center">
+          <img
+            alt="Bệnh nhân mới xuất viện cần theo dõi sức khỏe"
+            class="mb-1"
+            height="150"
+            src="https://www.hfh.com.vn/sites/default/files/knowledge/ly%20do%20kham%20suc%20khoe%20200kb_1.png"
+            width="150"
+          />
+          <p class="text-center text-green-600 font-semibold">
+            Bệnh nhân mới xuất viện cần theo dõi sức khỏe
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Product Benefits Section -->
+    <section class="py-4 bg-gradient-to-r from-blue-50 to-purple-50">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-4">Lợi Ích Sản Phẩm</h2>
+        <div
+          class="w-full grid grid-cols-1 md:grid-cols-2 gap-8 items-center overflow-hidden"
+        >
+          <div class="w-full flex items-center">
+            <img
+              alt="A blood pressure monitor with its box, instructions, and USB cable"
+              class="w-[50%] mr-4"
+              height="400"
+              src="https://storage.googleapis.com/a1aa/image/SPT9J9OEdSwshxjVl93K9tt9vzKQLeVORJaLn5rmguA.jpg"
+              width="600"
+            />
+            <img
+              alt="A blood pressure monitor with its box, instructions, and USB cable"
+              class="w-[50%] mr-4"
+              height="400"
+              src="https://storage.googleapis.com/a1aa/image/SPT9J9OEdSwshxjVl93K9tt9vzKQLeVORJaLn5rmguA.jpg"
+              width="600"
+            />
+          </div>
+          <div>
+            <ul class="list-none space-y-4">
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-blue-500 text-xl mr-2"> </i>
+                <span class="text-black text-lg">
+                  100% Bằng Tiếng Việt Dễ Dàng Sử Dụng
+                </span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-blue-500 text-xl mr-2"> </i>
+                <span class="text-black text-lg">
+                  Chế Độ Bảo Hành Cực Tốt (Lỗi, Hỏng được đổi mới trong 6 tháng)
+                </span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-blue-500 text-xl mr-2"> </i>
+                <span class="text-black text-lg">
+                  Độ Chính Xác Cao, Màn Hình Lớn, Dễ Sử Dụng
+                </span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-blue-500 text-xl mr-2"> </i>
+                <span class="text-black text-lg">
+                  Chỉ 30 Giây Có Ngay Kết Quả Chuẩn
+                </span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-blue-500 text-xl mr-2"> </i>
+                <span class="text-black text-lg">
+                  Công Nghệ Cảm Biến Thông Minh – Cho Kết Quả Chính Xác Hơn
+                </span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-blue-500 text-xl mr-2"> </i>
+                <span class="text-black text-lg">
+                  Bộ Nhớ Lưu Trữ Lên Đến 99 Lần Đo – Tiện Lợi Theo Dõi Sức Khỏe
+                </span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-blue-500 text-xl mr-2"> </i>
+                <span class="text-black text-lg">
+                  Tích Hợp Cảnh Báo Nhịp Tim Bất Thường – Giúp Phát Hiện Sớm Các
+                  Vấn Đề Tim Mạch
+                </span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-blue-500 text-xl mr-2"> </i>
+                <span class="text-black text-lg">
+                  Thiết Kế Nhỏ Gọn – Dễ Mang Theo Khi Đi Công Tác, Du Lịch
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-center mt-2">
+        <button
+          class="bg-red-500 text-white text-lg font-bold py-2 px-6 rounded hover:bg-red-600 transition duration-300 w-full"
+          onclick="scrollToSection()"
+        >
+          ĐẶT HÀNG NGAY
+        </button>
+      </div>
+    </section>
+
+    <!-- Actual Product Video Section -->
+    <section class="py-4 bg-white">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-4">
+          Video Giới Thiệu Sản Phẩm
+        </h2>
+        <div class="neumorphic p-8 rounded-3xl">
+          <video
+            class="w-full h-80 rounded-lg"
+            controls
+            preload="none"
+            poster="https://tazako.vn/wp-content/uploads/2023/12/AVA_TAZAKO_WEBSITE_MDHA.png"
+          >
+            <source
+              src="./15829aa5823d12257fb5bd26e1a6d8a5c77274c3a1d240531059830c.mp4"
+              type="video/mp4"
+            />
+          </video>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technical Specifications Section -->
+    <section class="py-4 bg-gradient-to-r from-blue-50 to-purple-50">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-4">Thông Tin Chi Tiết</h2>
+        <!-- Thông số kỹ thuật -->
+        <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+          <div class="neumorphic py-4 px-8 rounded-3xl h-full">
+            <h3 class="text-2xl font-semibold mb-4">Thông Số Kỹ Thuật</h3>
+            <ul class="list-disc list-inside text-gray-600">
+              <li><strong>Phạm vi đo:</strong> 0-280 mmHg (0-37,33kPa)</li>
+              <li><strong>Xung:</strong> 40-185 nhịp/phút</li>
+              <li><strong>Chu vi cổ tay áp dụng:</strong> 13,5cm - 19,5cm</li>
+              <li>
+                <strong>Độ chính xác:</strong> Áp suất ±3mmHg (trong vòng
+                ±0.4kPa)
+              </li>
+              <li><strong>Tỷ lệ xung:</strong> Độ chính xác ±5%</li>
+              <li>
+                <strong>Chức năng trung bình:</strong> Giá trị đo trung bình 3
+                nhóm cuối cùng
+              </li>
+              <li><strong>Chất liệu:</strong> ABS + màn hình LED</li>
+              <li>
+                <strong>Nguồn năng lượng:</strong> 2 pin AAA (không bao gồm)
+              </li>
+              <li>
+                <strong>Kích thước:</strong> 4.9" (L) x 3.9" (W) x 3.3" (H)
+              </li>
+              <li><strong>Kích thước đèn LED:</strong> 2.55" x 1.96"</li>
+              <li><strong>Bảo hành:</strong> 2 năm</li>
+            </ul>
+          </div>
+
+          <!-- Ưu điểm -->
+          <!-- <div class="neumorphic p-8 rounded-3xl h-full">
+            <h3 class="text-2xl font-semibold mb-4">Ưu Điểm Nổi Bật</h3>
+            <ul class="list-disc list-inside text-gray-600">
+              <li>
+                Thiết kế tự động 100%, dễ dàng sử dụng chỉ với một nút bấm.
+              </li>
+              <li>
+                Tự động điều chỉnh áp suất bơm hơi dựa trên cỡ tay và dao động
+                huyết áp.
+              </li>
+              <li>
+                Lựa chọn tốc độ xả hơi lý tưởng, giảm thiểu khó chịu khi đo.
+              </li>
+              <li>2 bộ nhớ, mỗi bộ nhớ lưu trữ 60 kết quả đo.</li>
+              <li>
+                Đạt tiêu chuẩn châu Âu, đã được thử nghiệm lâm sàng, cho kết quả
+                chính xác.
+              </li>
+            </ul>
+          </div> -->
+
+          <!-- Lưu ý -->
+          <div
+            class="bg-red-50 border-l-4 border-red-500 py-4 px-8 rounded-3xl shadow-lg h-full"
+          >
+            <h3 class="text-2xl font-semibold mb-4 text-red-600">
+              Lưu Ý Khi Sử Dụng
+            </h3>
+            <ul class="list-disc list-inside text-red-700">
+              <li>
+                Không nên đo trong vòng 30 phút sau khi ăn, uống, hút thuốc hoặc
+                tập thể dục.
+              </li>
+              <li>Lặp lại quá trình đo để lấy kết quả chính xác nhất.</li>
+              <li>
+                Không dùng cho bệnh nhân máu nhiễm mỡ, xơ vữa động mạch, bệnh
+                tim mạch (nên dùng loại đo bắp tay).
+              </li>
+              <li>
+                Không sử dụng cho trẻ sơ sinh, phụ nữ mang thai hoặc bệnh nhân
+                tiền sản giật.
+              </li>
+              <li>Không đo trên vết thương ở cổ tay.</li>
+              <li>
+                Bảo quản nơi khô thoáng, tránh ánh nắng mặt trời trực tiếp.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ministry of Health Inspection Photos Section -->
+    <section class="py-4 bg-white">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-4">
+          Kiểm Định Của Bộ Y Tế
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="neumorphic p-8 rounded-3xl">
+            <img
+              src="./author.png"
+              alt="Inspection 1"
+              class="w-full h-full object-cover rounded-lg"
+            />
+          </div>
+          <div class="neumorphic p-8 rounded-3xl">
+            <img
+              src="./confirm.png"
+              alt="Inspection 2"
+              class="w-full h-full object-cover rounded-lg"
+            />
+          </div>
+          <div class="neumorphic p-8 rounded-3xl">
+            <img
+              src="./kiem-dinh-thiet-bi-y-te-vnce-hn.jpg"
+              alt="Inspection 3"
+              class="w-full h-full object-cover rounded-lg"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Information Filling Form Section -->
+
+    <!-- Full Product Photos Section -->
+    <section class="py-4 bg-white">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-4">Hình Ảnh Sản Phẩm</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="neumorphic p-8 rounded-3xl">
+            <img
+              src="./image-product/Screen-Shot-2022-12-19-at-1.54.41-PM.png"
+              alt="Product 1"
+              class="w-full h-full object-cover rounded-lg"
+            />
+          </div>
+          <div class="neumorphic p-8 rounded-3xl">
+            <img
+              src="./image-product/Screen-Shot-2022-12-19-at-1.55.10-PM-768x1192.png"
+              alt="Product 2"
+              class="w-full h-full object-cover rounded-lg"
+            />
+          </div>
+          <div class="neumorphic p-8 rounded-3xl">
+            <img
+              src="./image-product/Screen-Shot-2022-12-19-at-1.55.24-PM-768x1098.png"
+              alt="Product 3"
+              class="w-full h-full object-cover rounded-lg"
+            />
+          </div>
+          <div class="neumorphic p-8 rounded-3xl">
+            <img
+              src="./image-product/Screen-Shot-2022-12-19-at-1.55.33-PM-768x866.png"
+              alt="Product 3"
+              class="w-full h-full object-cover rounded-lg"
+            />
+          </div>
+          <div class="neumorphic p-8 rounded-3xl">
+            <img
+              src="./image-product/Screen-Shot-2022-12-19-at-1.56.39-PM-768x823.png"
+              alt="Product 3"
+              class="w-full h-full object-cover rounded-lg"
+            />
+          </div>
+          <div class="neumorphic p-8 rounded-3xl">
+            <img
+              src="./image-product/Screen-Shot-2022-12-19-at-1.56.58-PM-768x891.png"
+              alt="Product 3"
+              class="w-full h-full object-cover rounded-lg"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Customer Reviews Section -->
+    <section class="py-4 bg-gradient-to-r from-blue-50 to-purple-50">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-4">
+          Đánh Giá Của Khách Hàng (738 đánh giá)
+        </h2>
+        <div class="flex items-center justify-end mb-1">
+          <div class="text-center cursor-pointer">
+            <span style="color: rgb(45, 45, 45)">Xem thêm &gt;</span>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div
+            class="max-w-2xl mx-auto bg-white p-4 border border-gray-300 rounded-lg"
+          >
+            <div class="flex items-start">
+              <img
+                alt="User profile picture"
+                class="w-12 h-12 rounded-full mr-4"
+                height="50"
+                src="https://picsum.photos/100/100?random=55"
+                width="50"
+              />
+              <div>
+                <div class="flex items-center">
+                  <span class="font-bold"> Quang Trần </span>
+                  <div class="ml-2 text-red-500">
+                    <i class="fas fa-star"> </i>
+                    <i class="fas fa-star"> </i>
+                    <i class="fas fa-star"> </i>
+                    <i class="fas fa-star"> </i>
+                    <i class="fas fa-star"> </i>
+                  </div>
+                </div>
+                <div class="text-gray-500 text-sm">2025-2-23 16:29</div>
+              </div>
+            </div>
+            <div class="mt-4">
+              <div class="text-gray-700">
+                <p>
+                  <span class="font-bold"> Công dụng: </span>
+                  đo huyết áp
+                </p>
+                <p>
+                  <span class="font-bold"> Đối tượng sử dụng: </span>
+                  ai cũng dùng được
+                </p>
+              </div>
+              <p class="mt-2 text-gray-700">
+                Sản phẩm như quảng cáo giá thành rẻ đáng mua chất lượng máy đo
+                chuẩn xác màn hình to dễ nhìn, rất xứng đáng mỗi nhà nên mua
+                theo dõi sức khỏe nhất là người lớn tuổi
+              </p>
+              <div class="mt-4 flex space-x-2">
+                <img
+                  alt="Image of the product in use"
+                  class="w-24 h-24 object-cover"
+                  height="100"
+                  src="./1/1.png"
+                  width="100"
+                />
+                <img
+                  alt="Image of the product in use"
+                  class="w-24 h-24 object-cover"
+                  height="100"
+                  src="./1/2.png"
+                  width="100"
+                />
+                <img
+                  alt="Image of the product in use"
+                  class="w-24 h-24 object-cover"
+                  height="100"
+                  src="./1/3.png"
+                  width="100"
+                />
+                <img
+                  alt="Image of the product in use"
+                  class="w-24 h-24 object-cover"
+                  height="100"
+                  src="./1/4.png"
+                  width="100"
+                />
+              </div>
+            </div>
+            <div class="mt-4 bg-gray-100 p-4 rounded-lg">
+              <p class="font-bold">Phản Hồi Của Người Bán</p>
+              <p class="text-gray-700">
+                Cảm ơn sự ủng hộ của bạn .chúc bạn có những trải nghiệm tốt khi
+                mua hàng.Hãy ủng hộ lần sau để nhận voucher ưu đãi lên đến 15%
+                nha khách iu
+              </p>
+            </div>
+            <div class="mt-4 flex items-center text-gray-500">
+              <i class="far fa-thumbs-up mr-2"> </i>
+              <span> Hữu ích? </span>
+            </div>
+          </div>
+
+          <div
+            class="max-w-2xl mx-auto bg-white p-4 border border-gray-300 rounded-lg"
+          >
+            <div class="flex items-start">
+              <img
+                alt="User profile picture"
+                class="w-12 h-12 rounded-full mr-4"
+                height="50"
+                src="https://picsum.photos/100/100?random=888"
+                width="50"
+              />
+              <div>
+                <div class="flex items-center">
+                  <span class="font-bold"> Quốc bảo </span>
+                  <div class="ml-2 text-red-500">
+                    <i class="fas fa-star"> </i>
+                    <i class="fas fa-star"> </i>
+                    <i class="fas fa-star"> </i>
+                    <i class="fas fa-star"> </i>
+                    <i class="fas fa-star"> </i>
+                  </div>
+                </div>
+                <div class="text-gray-500 text-sm">2024-06-29 08:23</div>
+              </div>
+            </div>
+            <div class="mt-4">
+              <div class="text-gray-700">
+                <p>
+                  <span class="font-bold"> Công dụng: </span>
+                  đo huyết áp
+                </p>
+                <p>
+                  <span class="font-bold"> Đối tượng sử dụng: </span>
+                  ai cũng dùng được
+                </p>
+              </div>
+              <p class="mt-2 text-gray-700">
+                Đã nhận được hàng giống như mô tả, đóng gói cẩn thận, đang test
+                chất lượng
+              </p>
+              <div class="mt-4 flex space-x-2">
+                <img
+                  alt="Image of the product in use"
+                  class="w-24 h-24 object-cover"
+                  height="100"
+                  src="./2/5.png"
+                  width="100"
+                />
+                <img
+                  alt="Image of the product in use"
+                  class="w-24 h-24 object-cover"
+                  height="100"
+                  src="./2/6.png"
+                  width="100"
+                />
+                <img
+                  alt="Image of the product in use"
+                  class="w-24 h-24 object-cover"
+                  height="100"
+                  src="./2/7.png"
+                  width="100"
+                />
+              </div>
+            </div>
+            <div class="mt-4 bg-gray-100 p-4 rounded-lg">
+              <p class="font-bold">Phản Hồi Của Người Bán</p>
+              <p class="text-gray-700">
+                chào bạn. Nếu sản phẩm có vấn đề gì bạn quay đoạn video giúp
+                shop để shop hỗ trợ bạn nha. Cảm ơn bạn NHiều ạ.
+              </p>
+            </div>
+            <div class="mt-4 flex items-center text-gray-500">
+              <i class="far fa-thumbs-up mr-2"> </i>
+              <span> Hữu ích? </span>
+            </div>
+          </div>
+
+          <div
+            class="max-w-2xl mx-auto bg-white p-4 border border-gray-300 rounded-lg"
+          >
+            <div class="flex items-start">
+              <img
+                alt="User profile picture"
+                class="w-12 h-12 rounded-full mr-4"
+                height="50"
+                src="https://picsum.photos/100/100?random=25"
+                width="50"
+              />
+              <div>
+                <div class="flex items-center">
+                  <span class="font-bold"> Minh Anh </span>
+                  <div class="ml-2 text-red-500">
+                    <i class="fas fa-star"> </i>
+                    <i class="fas fa-star"> </i>
+                    <i class="fas fa-star"> </i>
+                    <i class="fas fa-star"> </i>
+                    <i class="fas fa-star"> </i>
+                  </div>
+                </div>
+                <div class="text-gray-500 text-sm">2024-12-15 14:45</div>
+              </div>
+            </div>
+            <div class="mt-4">
+              <div class="text-gray-700">
+                <p>
+                  <span class="font-bold"> Công dụng: </span>
+                  đo huyết áp
+                </p>
+                <p>
+                  <span class="font-bold"> Đối tượng sử dụng: </span>
+                  ai cũng dùng được
+                </p>
+              </div>
+              <p class="mt-2 text-gray-700">
+                Sản phẩm giống mô tả, chất lượng ổn. Đóng gói cẩn thận, giao
+                hàng nhanh. Sẽ tiếp tục ủng hộ shop!
+              </p>
+              <div class="mt-4 flex space-x-2">
+                <img
+                  alt="Image of the product in use"
+                  class="w-24 h-24 object-cover"
+                  height="100"
+                  src="./3/8.png"
+                  width="100"
+                />
+                <img
+                  alt="Image of the product in use"
+                  class="w-24 h-24 object-cover"
+                  height="100"
+                  src="./3/9.png"
+                  width="100"
+                />
+                <img
+                  alt="Image of the product in use"
+                  class="w-24 h-24 object-cover"
+                  height="100"
+                  src="./3/10.png"
+                  width="100"
+                />
+                <img
+                  alt="Image of the product in use"
+                  class="w-24 h-24 object-cover"
+                  height="100"
+                  src="./3/11.png"
+                  width="100"
+                />
+              </div>
+            </div>
+            <div class="mt-4 bg-gray-100 p-4 rounded-lg">
+              <p class="font-bold">Phản Hồi Của Người Bán</p>
+              <p class="text-gray-700">
+                Cảm ơn bạn đã tin tưởng và ủng hộ shop. Nếu có bất kỳ vấn đề gì,
+                bạn cứ nhắn tin cho shop nhé!
+              </p>
+            </div>
+            <div class="mt-4 flex items-center text-gray-500">
+              <i class="far fa-thumbs-up mr-2"> </i>
+              <span> Hữu ích? </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="py-4 bg-gradient-to-r from-blue-50 to-purple-50 grid grid-cols-1 md:grid-cols-2 gap-4"
+    >
+      <div
+        class="bg-white p-6 rounded-lg shadow-lg text-center container mx-auto px-4"
+        onclick="scrollToSection()"
+      >
+        <h1 class="text-xl font-bold mb-2">
+          ĐẶT HÀNG HÔM NAY NHẬN NGAY ƯU ĐÃI
+        </h1>
+        <div class="text-3xl font-bold text-red-500 mb-2">
+          CHỈ CÒN <span class="text-4xl">265.000đ</span>
+          <i class="fas fa-check-circle text-purple-500"></i>
+        </div>
+        <div class="text-gray-500 mb-2">
+          Giá gốc: <span class="line-through">599.000đ</span>
+          <span class="text-orange-500">Tiết kiệm: 334k</span>
+        </div>
+
+        <div
+          class="bg-yellow-100 p-3 rounded-lg text-red-600 font-bold mb-2 text-xl"
+        >
+          🔥 MUA 2 MÁY CHỈ
+          <span class="text-4xl text-red-500">509.000đ</span> 🔥
+          <div class="text-gray-600 text-sm">(Tiết kiệm hơn!)</div>
+        </div>
+
+        <div class="border border-gray-300 p-4 mb-4">
+          <div class="flex items-center mb-2">
+            <i class="fas fa-check-circle text-blue-500 mr-2"></i>
+            <span>Kiểm tra hàng trước khi thanh toán</span>
+          </div>
+          <div class="flex items-center mb-2">
+            <i class="fas fa-check-circle text-blue-500 mr-2"></i>
+            <span>Lỗi 1 đổi 1 trong vòng 7 ngày</span>
+          </div>
+          <div class="flex items-center mb-2">
+            <i class="fas fa-check-circle text-blue-500 mr-2"></i>
+            <span>Bảo hành trong vòng 6 tháng</span>
+          </div>
+          <div class="flex items-center">
+            <i class="fas fa-check-circle text-blue-500 mr-2"></i>
+            <span>Miễn phí giao hàng toàn quốc</span>
+          </div>
+        </div>
+        <div class="text-red-500 font-bold mb-2">Khuyến mãi sắp kết thúc!</div>
+        <div class="flex justify-center space-x-2 text-center">
+          <div class="bg-black text-white p-2 rounded">
+            <div class="text-2xl font-bold">00</div>
+            <div class="text-sm">Ngày</div>
+          </div>
+          <div class="bg-black text-white p-2 rounded">
+            <div class="text-2xl font-bold">00</div>
+            <div class="text-sm">Giờ</div>
+          </div>
+          <div class="bg-black text-white p-2 rounded">
+            <div class="text-2xl font-bold" id="minutesSecond">00</div>
+            <div class="text-sm">Phút</div>
+          </div>
+          <div class="bg-black text-white p-2 rounded">
+            <div class="text-2xl font-bold" id="secondsSecond">00</div>
+            <div class="text-sm">Giây</div>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 mt-2">
+          <div class="flex flex-col items-center">
+            <img src="./Screenshot 2025-03-06 105252.png" />
+          </div>
+          <div class="flex flex-col items-center">
+            <img src="./Screenshot 2025-03-06 105829.png" />
+          </div>
+        </div>
+      </div>
+      <div
+        class="bg-white p-6 rounded-lg shadow-lg text-center container mx-auto px-4"
+        id="send-infor"
+      >
+        <h2 class="text-3xl font-bold text-center mb-4">
+          ĐIỀN ĐẦY ĐỦ THÔNG TIN BÊN DƯỚI ĐỂ ĐẶT HÀNG
+        </h2>
+        <form
+          class="neumorphic p-8 rounded-3xl max-w-lg mx-auto"
+          id="information-client"
+        >
+          <input
+            type="text"
+            placeholder="Họ và Tên"
+            id="name"
+            name="name"
+            class="w-full p-3 mb-4 rounded-lg border border-gray-300"
+            required
+          />
+          <input
+            type="tel"
+            placeholder="Số Điện Thoại"
+            id="phone"
+            name="phone"
+            class="w-full p-3 mb-4 rounded-lg border border-gray-300"
+            required
+          />
+          <input
+            type="text"
+            placeholder="Địa chỉ (Ghi rõ số nhà, tên đường,...)"
+            id="address"
+            name="address"
+            class="w-full p-3 mb-4 rounded-lg border border-gray-300"
+            required
+          />
+          <select
+            id="province"
+            class="w-full p-3 mb-4 rounded-lg border border-gray-300"
+            required
+          >
+            <option value="">Chọn tỉnh/thành</option>
+          </select>
+          <select
+            id="district"
+            class="w-full p-3 mb-4 rounded-lg border border-gray-300"
+            required
+          >
+            <option value="">Chọn quận/huyện</option>
+          </select>
+          <select
+            id="ward"
+            class="w-full p-3 mb-4 rounded-lg border border-gray-300"
+            required
+          >
+            <option value="">Chọn phường/xã</option>
+          </select>
+
+          <div class="mb-2 flex items-center">
+            <span class="checkbox-container">
+              <input
+                id="one"
+                type="checkbox"
+                class="mr-2 custom-checkbox"
+                name="product"
+              />
+              <span class="input-check"></span>
+            </span>
+            <span class="text-check text-lg"
+              >1 MÁY 265.000đ + MIỄN PHÍ SHIP</span
+            >
+          </div>
+          <div class="mb-2 flex items-center">
+            <span class="checkbox-container">
+              <input
+                id="two"
+                type="checkbox"
+                class="mr-2 custom-checkbox"
+                name="product"
+              />
+              <span class="input-check"></span>
+            </span>
+            <span class="text-check text-lg"
+              >2 MÁY 509.000đ + MIỄN SHIP (tiết kiệm hơn)</span
+            >
+          </div>
+
+          <button
+            type="submit"
+            class="w-full bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300 flash-effect"
+          >
+            Đặt Hàng Ngay - Ưu Đãi Liền Tay
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <div id="toast" class="toast">
+      <div class="flex items-center">
+        <img
+          id="toast-avatar"
+          src="https://w.ladicdn.com/63c4b1a325b8dd0012a5abb3/co-gai-philippines3-9371-1496995227-20230507023505-bkrk-.jpg"
+          alt="Avatar"
+          class="w-8 h-8 rounded-full"
+        />
+        <div class="ml-4">
+          <p class="font-bold" id="toast-name">Lan Huong</p>
+          <p>Đã đặt hàng thành công</p>
+          <p class="text-sm text-gray-500" id="toast-time">2 phút trước</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+      <div class="container mx-auto px-4 text-center">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Contact Information -->
+          <div>
+            <h3 class="text-xl font-bold mb-4">Thông Tin Liên Hệ</h3>
+            <p>Địa chỉ: TỪ SƠN - BẮC NINH</p>
+            <p>Email: ytegiadinhh@gmail.com</p>
+            <p>Hotline: 0799 176 434</p>
+          </div>
+
+          <!-- Quick Links -->
+          <div>
+            <h3 class="text-xl font-bold mb-4">Liên Kết Nhanh</h3>
+            <ul class="space-y-2">
+              <li>
+                <a
+                  href="https://www.facebook.com/profile.php?id=61551463125897"
+                  class="hover:text-blue-400"
+                  >Trang Chủ</a
+                >
+              </li>
+              <li><a class="hover:text-blue-400">Sản Phẩm</a></li>
+              <li><a class="hover:text-blue-400">Đánh Giá</a></li>
+              <li><a class="hover:text-blue-400">Liên Hệ</a></li>
+            </ul>
+          </div>
+
+          <!-- Social Media -->
+          <div>
+            <h3 class="text-xl font-bold mb-4">Theo Dõi Chúng Tôi</h3>
+            <div class="flex justify-center space-x-4">
+              <a
+                href="https://www.facebook.com/profile.php?id=61551463125897"
+                class="text-white hover:text-blue-400"
+                ><i class="fab fa-facebook text-2xl"></i
+              ></a>
+              <a class="text-white hover:text-blue-400"
+                ><i class="fab fa-twitter text-2xl"></i
+              ></a>
+              <a class="text-white hover:text-blue-400"
+                ><i class="fab fa-instagram text-2xl"></i
+              ></a>
+              <a class="text-white hover:text-blue-400"
+                ><i class="fab fa-youtube text-2xl"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="mt-8 border-t border-gray-700 pt-8">
+          <p>&copy; All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <div id="loading-overlay" class="overlay" style="display: none">
+      <div class="spin"></div>
+    </div>
+
+    <div id="overlay" class="overlay"></div>
+
+    <div
+      class="bg-white rounded-lg shadow-lg p-6 max-w-sm text-center popup"
+      id="popup"
+    >
+      <h1 class="text-xl font-bold mb-4">ĐẶT HÀNG THÀNH CÔNG</h1>
+      <div class="flex justify-center mb-4">
+        <img
+          alt="Product image showing a box and a device"
+          class="w-24 h-24 object-cover"
+          height="150"
+          src="./image-product/Screen-Shot-2022-12-19-at-1.56.58-PM-768x891.png"
+          width="150"
+        />
+      </div>
+      <p class="text-lg font-semibold mb-2">CẢM ƠN QUÝ KHÁCH ĐÃ ĐẶT HÀNG</p>
+      <p class="text-sm mb-4">
+        Nhân viên chăm sóc khách hàng của chúng tôi sẽ liên hệ với quý khách
+        bằng cuộc gọi trong thời gian sớm nhất.
+      </p>
+      <p class="text-sm italic mb-6">
+        "SỰ HÀI LÒNG CỦA QUÝ KHÁCH LÀ THÀNH CÔNG LỚN CỦA CHÚNG TÔI"
+      </p>
+      <button
+        id="close-popup"
+        class="bg-green-600 text-white py-2 px-4 rounded"
+      >
+        ĐÓNG
+      </button>
+    </div>
+
+    <!-- Toast Notification -->
+  </body>
+
+  <script>
+    let timeLeft = 45 * 60;
+    const minutesElement = document.getElementById("minutes");
+    const secondsElement = document.getElementById("seconds");
+    const minutesElementSecond = document.getElementById("minutesSecond");
+    const secondsElementSecond = document.getElementById("secondsSecond");
+
+    const updateTimer = () => {
+      if (timeLeft <= 0) {
+        clearInterval(timer);
+        [minutesElement, minutesElementSecond].forEach(
+          (el) => (el.textContent = "00")
+        );
+        [secondsElement, secondsElementSecond].forEach(
+          (el) => (el.textContent = "00")
+        );
+      } else {
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+        [minutesElement, minutesElementSecond].forEach(
+          (el) => (el.textContent = minutes.toString().padStart(2, "0"))
+        );
+        [secondsElement, secondsElementSecond].forEach(
+          (el) => (el.textContent = seconds.toString().padStart(2, "0"))
+        );
+        timeLeft--;
+      }
+    };
+
+    const timer = setInterval(updateTimer, 1000);
+
+    const getRandomAvatarUrl = () =>
+      `https://picsum.photos/100/100?random=${Math.floor(
+        Math.random() * 1000
+      )}`;
+    const vietnameseNames = [
+      "An Nhiên",
+      "Ánh Dương",
+      "Anh Dũng",
+      "Bảo Châu",
+      "Bảo Hân",
+      "Bá Long",
+      "Bích Ngọc",
+      "Cát Tường",
+      "Bảo Khang",
+      "Diễm Quỳnh",
+      "Diệu Hằng",
+      "Bảo Lâm",
+      "Diệu Linh",
+      "Hà My",
+      "Bảo Minh",
+      "Hà Phương",
+      "Hạnh Dung",
+      "Bình An",
+      "Hiền Lương",
+      "Hoàng Anh",
+      "Cao Minh",
+      "Hoàng Lan",
+      "Hồng Nhung",
+      "Chí Bảo",
+      "Hương Giang",
+      "Khánh Linh",
+      "Chí Dũng",
+      "Kim Chi",
+      "Kim Ngân",
+      "Công Thành",
+      "Đình An",
+      "Đình Duy",
+      "Hà Phương",
+      "Đức Anh",
+      "Đức Bình",
+      "Lan Chi",
+      "Đức Huy",
+      "Duy Khánh",
+      "Lan Hương",
+      "Duy Khang",
+      "Duy Phúc",
+      "Mai Anh",
+      "Gia Bảo",
+      "Gia Huy",
+      "Mai Linh",
+      "Hải Đăng",
+      "Hải Nam",
+      "Mỹ Hạnh",
+      "Hữu Nghĩa",
+      "Hữu Phước",
+      "Ngọc Anh",
+      "Hữu Tài",
+      "Khắc Duy",
+      "Ngọc Diệp",
+      "Khánh An",
+      "Khánh Duy",
+      "Ngọc Hân",
+      "Minh Đức",
+      "Minh Hào",
+      "Ngọc Lan",
+      "Ngọc Minh",
+      "Nhật Lệ",
+      "Ngọc Hưng",
+      "Như Quỳnh",
+      "Phương Anh",
+      "Ngọc Long",
+      "Phương Nhi",
+      "Quỳnh Anh",
+      "Nhật Hào",
+      "Quỳnh Châu",
+      "Quỳnh Trang",
+      "Nhật Minh",
+      "Thanh Mai",
+      "Thanh Nhàn",
+      "Nhật Quang",
+      "Thiên Kim",
+      "Thiên Thanh",
+      "Nhật Tân",
+      "Thục Trinh",
+      "Thùy Anh",
+      "Phước Thịnh",
+      "Thùy Dung",
+      "Thùy Linh",
+      "Quang Huy",
+      "Thùy Trang",
+      "Trúc Quỳnh",
+      "Quang Khải",
+      "Tuyết Nhi",
+      "Vân Anh",
+      "Quốc Anh",
+      "Quốc Bảo",
+      "Quốc Hưng",
+      "Thiên Thanh",
+      "Thanh Đạt",
+      "Thanh Phong",
+      "Thục Trinh",
+      "Thiện Nhân",
+      "Trọng Nghĩa",
+      "Thùy Anh",
+      "Tuấn Kiệt",
+      "Văn Tùng",
+      "Thùy Dung",
+    ];
+    const showRandomToast = () => {
+      const toast = document.getElementById("toast");
+      const toastName = document.getElementById("toast-name");
+      const toastTime = document.getElementById("toast-time");
+      const toastAvatar = document.getElementById("toast-avatar");
+
+      toastAvatar.src = getRandomAvatarUrl();
+      toastName.textContent =
+        vietnameseNames[Math.floor(Math.random() * vietnameseNames.length)];
+      toastTime.textContent = `${Math.floor(Math.random() * 5) + 1} phút trước`;
+
+      toast.style.animation = "";
+      toast.style.display = "flex";
+      void toast.offsetWidth;
+      toast.style.animation = "slideDown 0.5s ease-in-out forwards";
+
+      setTimeout(() => {
+        toast.style.animation = "fadeOut 0.5s ease-in-out forwards";
+        setTimeout(() => {
+          toast.style.display = "none";
+          toast.style.animation = "";
+        }, 500);
+      }, 5000);
+    };
+
+    setInterval(showRandomToast, 7000);
+
+    const scrollToSection = () =>
+      document
+        .getElementById("send-infor")
+        .scrollIntoView({ behavior: "smooth" });
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const provinceSelect = document.getElementById("province");
+      const districtSelect = document.getElementById("district");
+      const wardSelect = document.getElementById("ward");
+
+      fetch("https://provinces.open-api.vn/api/p")
+        .then((response) => response.json())
+        .then((provinces) => {
+          provinces.forEach((province) => {
+            provinceSelect.add(new Option(province.name, province.code));
+          });
+        });
+
+      provinceSelect.addEventListener("change", () => {
+        const provinceCode = provinceSelect.value;
+        districtSelect.innerHTML = '<option value="">Chọn quận/huyện</option>';
+        wardSelect.innerHTML = '<option value="">Chọn phường/xã</option>';
+
+        if (!provinceCode) return;
+
+        fetch(`https://provinces.open-api.vn/api/p/${provinceCode}?depth=2`)
+          .then((response) => response.json())
+          .then((data) => {
+            data.districts.forEach((district) => {
+              districtSelect.add(new Option(district.name, district.code));
+            });
+          });
+      });
+
+      districtSelect.addEventListener("change", () => {
+        const districtCode = districtSelect.value;
+        wardSelect.innerHTML = '<option value="">Chọn phường/xã</option>';
+
+        if (!districtCode) return;
+
+        fetch(`https://provinces.open-api.vn/api/d/${districtCode}?depth=2`)
+          .then((response) => response.json())
+          .then((data) => {
+            data.wards.forEach((ward) => {
+              wardSelect.add(new Option(ward.name, ward.code));
+            });
+          });
+      });
+    });
+
+    document
+      .getElementById("information-client")
+      .addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        document.getElementById("loading-overlay").style.display = "flex";
+
+        const formData = new FormData(e.target);
+
+        const products = [];
+
+        if (document.getElementById("one").checked) {
+          products.push("1 MÁY 265.000đ");
+        }
+        if (document.getElementById("two").checked) {
+          products.push("2 MÁY 509.000đ");
+        }
+
+        const data = {
+          name: formData.get("name"),
+          phone: formData.get("phone"),
+          address: formData.get("address"),
+          province:
+            document.getElementById("province").options[
+              document.getElementById("province").selectedIndex
+            ].text,
+          district:
+            document.getElementById("district").options[
+              document.getElementById("district").selectedIndex
+            ].text,
+          ward: document.getElementById("ward").options[
+            document.getElementById("ward").selectedIndex
+          ].text,
+          product: products.join(", "),
+        };
+
+        console.log(data);
+
+        fetch(
+          "https://script.google.com/macros/s/AKfycbz-oY7Ym7WlJZI0E6RT7ebPitg8yo_pYzilZ1LZaO1Y-yb417FIt91ANyWx7H62dKk7/exec",
+          {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+            mode: "no-cors",
+          }
+        ).finally(() => {
+          document.getElementById("loading-overlay").style.display = "none";
+
+          showPopup();
+
+          e.target.reset();
+
+          fbq("track", "Lead"); // track tới pixel meta
+        });
+      });
+
+    const showPopup = () => {
+      document.getElementById("overlay").style.display = "block";
+      document.getElementById("popup").style.display = "block";
+    };
+
+    const hidePopup = () => {
+      document.getElementById("overlay").style.display = "none";
+      document.getElementById("popup").style.display = "none";
+    };
+
+    document.getElementById("close-popup").addEventListener("click", hidePopup);
+    document.getElementById("overlay").addEventListener("click", hidePopup);
+  </script>
+</html>
